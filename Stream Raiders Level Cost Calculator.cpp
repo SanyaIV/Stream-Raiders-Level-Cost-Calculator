@@ -1,5 +1,6 @@
 #include <exception>
 #include <iostream>
+#include <limits>
 #include <utility>
 #include <vector>
 
@@ -42,7 +43,30 @@ const std::vector<std::pair<unsigned int, unsigned int>> LevelCosts{
 
 int main()
 {
-    
+    unsigned int FromLevel, ToLevel;
+
+    while (true)
+    {
+        std::cout << "Input current level and desired level (0, 0 to exit): ";
+
+        try
+        {
+            std::cin >> FromLevel >> ToLevel;
+            if (std::cin.fail()) throw std::runtime_error("Invalid input");
+            if (FromLevel == 0 && ToLevel == 0) return 0;
+
+            std::pair<unsigned int, unsigned int> Cost = CalculateLevelCost(FromLevel, ToLevel);
+            std::cout << "Cost to go from level " << FromLevel << " to level " << ToLevel << " is " << Cost.first << " Gold and " << Cost.second << " Scrolls." << std::endl << std::endl;
+        }
+        catch (const std::exception& e)
+        {
+            std::cout << e.what() << std::endl << std::endl;
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        }
+    }
+
+    return 0;
 }
 
 /**
@@ -55,7 +79,7 @@ std::pair<unsigned int, unsigned int> CalculateLevelCost(unsigned int FromLevel,
 {
     std::pair<unsigned int, unsigned int> LevelCostSum { 0, 0 };
 
-    if (FromLevel >= ToLevel || FromLevel > LevelCosts.size() || ToLevel > LevelCosts.size() + 1) throw "Invalid arguments";
+    if (FromLevel >= ToLevel || FromLevel >= LevelCosts.size() || ToLevel > LevelCosts.size()) throw std::runtime_error("Invalid levels");
 
     for (unsigned int i = FromLevel; i < ToLevel; ++i)
     {

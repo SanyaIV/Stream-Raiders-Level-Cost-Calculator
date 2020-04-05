@@ -37,3 +37,10 @@
 *.vcxproj
 *.filters
 *.user
+.vs/Stream Raiders Level Cost Calculator/v16/.suo
+*.tlog
+*.ilk
+*.log
+*.pdb
+*.txt
+*.idb
