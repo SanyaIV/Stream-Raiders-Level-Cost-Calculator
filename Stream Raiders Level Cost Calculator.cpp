@@ -7,7 +7,7 @@
 std::pair<unsigned int, unsigned int> CalculateLevelCost(unsigned int FromLevel, unsigned int ToLevel);
 
 // Pair of cost to upgrade from that level to the next level <Gold, Scrolls>. Index in vector represents the level.
-std::vector<std::pair<unsigned int, unsigned int>> LevelCosts{
+const std::vector<std::pair<unsigned int, unsigned int>> LevelCosts{
     std::make_pair(10, 5),
     std::make_pair(25, 15),
     std::make_pair(35, 20),
