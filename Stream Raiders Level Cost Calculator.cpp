@@ -18,8 +18,8 @@ int main()
         try
         {
             std::cin >> FromLevel >> ToLevel;
-            if (std::cin.fail()) throw std::runtime_error("Invalid input");
-            if (FromLevel == 0 && ToLevel == 0) return 0;
+            if (std::cin.fail()) throw std::runtime_error("Invalid input"); // If input fails we throw so we can catch it properly.
+            if (FromLevel == 0 && ToLevel == 0) return 0; // Input to exit.
 
             std::pair<unsigned int, unsigned int> Cost = CalculateLevelCost(FromLevel, ToLevel);
             std::cout << "Cost to go from level " << FromLevel << " to level " << ToLevel << " is " << Cost.first << " Gold and " << Cost.second << " Scrolls." << std::endl << std::endl;
@@ -43,7 +43,7 @@ int main()
  */
 std::pair<unsigned int, unsigned int> CalculateLevelCost(unsigned int FromLevel, unsigned int ToLevel)
 {
-    // Pair of cost to upgrade from that level to the next level <Gold, Scrolls>. Index in vector represents the level.
+    // Pair of cost to upgrade from that level to the next level <Gold, Scrolls>. Index in vector represents the level. Costs taken from https://streamraiders.fandom.com/wiki/Unit_Leveling at 2020-04-05.
     static const std::vector<std::pair<unsigned int, unsigned int>> LevelCosts{
         std::make_pair(10, 5),
         std::make_pair(25, 15),
