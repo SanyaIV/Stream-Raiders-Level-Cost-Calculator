@@ -81,10 +81,10 @@ std::pair<unsigned int, unsigned int> CalculateLevelCost(unsigned int FromLevel,
 
     if (FromLevel >= ToLevel || FromLevel >= LevelCosts.size() || ToLevel > LevelCosts.size()) throw std::runtime_error("Invalid levels");
 
-    for (unsigned int i = FromLevel; i < ToLevel; ++i)
+    for (unsigned int Level = FromLevel; Level < ToLevel; ++Level)
     {
-        LevelCostSum.first += LevelCosts[i].first;
-        LevelCostSum.second += LevelCosts[i].second;
+        LevelCostSum.first += LevelCosts[Level].first;
+        LevelCostSum.second += LevelCosts[Level].second;
     }
 
     return LevelCostSum;
