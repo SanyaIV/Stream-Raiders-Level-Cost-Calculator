@@ -1,47 +1,8 @@
-#include <exception>
-#include <iostream>
-#include <limits>
-#include <utility>
+#include "Calculator.h"
+#include <stdexcept>
 #include <vector>
 
-// Forward declaration
-std::pair<unsigned int, unsigned int> CalculateLevelCost(unsigned int FromLevel, unsigned int ToLevel);
-
-int main()
-{
-    unsigned int FromLevel, ToLevel;
-
-    while (true)
-    {
-        std::cout << "Input current level and desired level (0, 0 to exit): ";
-
-        try
-        {
-            std::cin >> FromLevel >> ToLevel;
-            if (std::cin.fail()) throw std::runtime_error("Invalid input"); // If input fails we throw so we can catch it properly.
-            if (FromLevel == 0 && ToLevel == 0) return 0; // Input to exit.
-
-            std::pair<unsigned int, unsigned int> Cost = CalculateLevelCost(FromLevel, ToLevel);
-            std::cout << "Cost to go from level " << FromLevel << " to level " << ToLevel << " is " << Cost.first << " Gold and " << Cost.second << " Scrolls." << std::endl << std::endl;
-        }
-        catch (const std::exception& e)
-        {
-            std::cout << e.what() << std::endl << std::endl;
-            std::cin.clear();
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        }
-    }
-
-    return 0;
-}
-
-/**
- * Calculates the total cost to upgrade a unit from one level to another.
- * @param FromLevel - The current level of the unit.
- * @param ToLevel - The desired level of the unit.
- * @return An std::pair containing the total cost in Gold first and total cost in Scrolls second.
- */
-std::pair<unsigned int, unsigned int> CalculateLevelCost(unsigned int FromLevel, unsigned int ToLevel)
+std::pair<unsigned int, unsigned int> Calculator::CalculateLevelCost(unsigned int FromLevel, unsigned int ToLevel)
 {
     // Pair of cost to upgrade from that level to the next level <Gold, Scrolls>. Index in vector represents the level. Costs taken from https://streamraiders.fandom.com/wiki/Unit_Leveling at 2020-04-05.
     static const std::vector<std::pair<unsigned int, unsigned int>> LevelCosts{
@@ -77,7 +38,7 @@ std::pair<unsigned int, unsigned int> CalculateLevelCost(unsigned int FromLevel,
         std::make_pair(1200, 400)
     };
 
-    std::pair<unsigned int, unsigned int> LevelCostSum { 0, 0 };
+    std::pair<unsigned int, unsigned int> LevelCostSum{ 0, 0 };
 
     if (FromLevel >= ToLevel || FromLevel >= LevelCosts.size() || ToLevel > LevelCosts.size()) throw std::runtime_error("Invalid levels");
 
