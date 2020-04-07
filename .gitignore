@@ -39,10 +39,6 @@ Test/Release/*
 Debug/*
 Release/*
 packages/*
-*.sln
-*.vcxproj
-*.vcxproj.filters
-*.vcxproj.user
 .vs/*
 
 *.CopyComplete
